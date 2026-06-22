@@ -49,3 +49,5 @@ nav:
     - Installation: pipeline/installation.md
     - Configuration: pipeline/configuration.md
     - Running: pipeline/running.md
+  - R-scripts:    
+    - Miscellaneous: r-scripts/miscellaneous.md
