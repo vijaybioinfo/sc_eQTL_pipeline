@@ -51,3 +51,4 @@ nav:
     - Running: pipeline/running.md
   - R-scripts:    
     - Miscellaneous: r-scripts/miscellaneous.md
+  - GitHub: https://github.com/vijaybioinfo/sc_eQTL_pipeline 
