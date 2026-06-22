@@ -1,0 +1,3 @@
+cell,tissue,seurat.obj.file,resolution,subset,expFile,donorFile,clusterID,cluster_def
+CD8,ALL,/path/to/seurat_object.RDS,0.2,0,/path/to/pseudobulk/profile/gene_expression.txt,/path/to/donors.txt,Bystander TRM cells,Bystander TRM cells
+CD8,ALL,/path/to/seurat_object.RDS,0.2,1,/path/to/pseudobulk/profile/gene_expression.txt,/path/to/donors.txt,Effector memory CD8 T cells (TEFF),Effector memory CD8 T cells (TEFF)

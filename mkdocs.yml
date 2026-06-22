@@ -1,0 +1,51 @@
+site_name: DICE sc-eQTL Pipeline
+site_description: A reproducible Snakemake + R pipeline for sc-eQTL analysis, developed by the DICE team LJI.
+site_url: https://vijaybioinfo.github.io/sc_eQTL_pipeline
+
+repo_name: vijaybioinfo/sc_eQTL_pipeline
+repo_url: https://github.com/vijaybioinfo/sc_eQTL_pipeline
+edit_uri: edit/main/docs/
+
+theme:
+  name: material
+  palette:
+    - scheme: default
+      primary: blue
+      accent: teal
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      primary: blue
+      accent: teal
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - search.highlight
+    - content.code.copy
+    - content.action.edit
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.tabbed:
+      alternate_style: true
+  - attr_list
+  - md_in_html
+  - tables
+
+nav:
+  - Home: index.md
+  - Pipeline:
+    - Overview: pipeline/overview.md
+    - Installation: pipeline/installation.md
+    - Configuration: pipeline/configuration.md
+    - Running: pipeline/running.md
