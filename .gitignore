@@ -1,0 +1,38 @@
+# ── MkDocs ────────────────────────────────────────────────
+site/                        # local build output
+.cache/                      # mkdocs-material cache
+
+# ── Snakemake ─────────────────────────────────────────────
+.snakemake/                  # snakemake metadata and locks
+*.snakemake.log
+
+# ── R ─────────────────────────────────────────────────────
+.Rhistory
+.RData
+.Rproj.user/
+*.Rproj
+*.Rout
+
+# ── Pipeline results & temp ───────────────────────────────
+results/
+temp/
+logs/
+benchmark/
+
+# ── Python ────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.egg-info/
+.env
+.venv/
+
+# ── OS ────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ── Editors ───────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
