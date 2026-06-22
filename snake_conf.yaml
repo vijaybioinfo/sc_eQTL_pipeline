@@ -1,0 +1,28 @@
+inpFiles:
+  vcf_genotype: /path/to/genotype.vcf.gz
+  datasets: /path/to/datasets.csv
+  covariates: /path/to/covariates.txt
+  snpfiles: /path/to/snpfiles.txt
+  geneannot: /path/to/geneannot.txt
+  geneannot_complete: /path/to/geneannot_complete.txt
+  rstables: /path/to/rstables/
+
+fastqtl_parameters:
+  chunks: 100
+  ma_sample: 10
+  cis_window: 1000000
+  permute_down: 1000
+  permute_up: 10000
+
+parameters:
+  MAF: 0.05
+  PCS: 1
+  Factors: 2
+  permutations: 1
+  covariates: ['Gender', 'Age']
+  run_var_genes: False ## True or False
+  n_var_genes: NA ### if 'run_var_genes' == True, 'n_var_genes' int > 0 & < number genes in the matrix. If 'run_var_genes' == False, 'n_var_genes' == NA
+
+config:
+  workdir: /path/to/workdir/
+  peertool: /path/to/peertool

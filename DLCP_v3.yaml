@@ -1,0 +1,24 @@
+name: DLCP_v3
+channels:
+  - conda-forge
+dependencies:
+  - bioconda::bcftools
+  - bioconda::bioconductor-edger
+  - bioconda::bioconductor-qvalue
+  - bioconda::snakemake[version='<8.0,>=6.0']
+  - r-arrow
+  - r-data.table
+  - r-ggplot2
+  - r-matrix
+  - r-matrixeqtl
+  - r-matrixstats
+  - r-optparse
+  - r-seurat
+  - r-susier
+  - r-tidyverse
+  - conda-forge::r-argparse
+  - ca-certificates
+  - certifi
+  - openssl
+  - conda-forge::r-argparser
+prefix: /home/cgonzalez/mambaforge/envs/DLCP_v3
