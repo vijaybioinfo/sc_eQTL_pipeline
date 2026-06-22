@@ -14,6 +14,7 @@ A general enviroment file is provided for all rules.
 ```bash
 conda 
 conda env create -f environment.yaml
+conda env create -f envs/pyEigenMT.yaml
 conda activate DLCP_v3
 ```
 
