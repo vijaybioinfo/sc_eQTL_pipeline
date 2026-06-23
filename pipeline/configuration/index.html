@@ -1,0 +1,1128 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A reproducible Snakemake + R pipeline for sc-eQTL analysis, developed by the DICE team LJI.">
+      
+      
+      
+        <link rel="canonical" href="https://vijaybioinfo.github.io/sc_eQTL_pipeline/pipeline/configuration/">
+      
+      
+        <link rel="prev" href="../installation/">
+      
+      
+        <link rel="next" href="../running/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Configuration - DICE sc-eQTL Pipeline</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="teal">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#running-the-pipeline" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="DICE sc-eQTL Pipeline" class="md-header__button md-logo" aria-label="DICE sc-eQTL Pipeline" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            DICE sc-eQTL Pipeline
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Configuration
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="teal"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="teal"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/vijaybioinfo/sc_eQTL_pipeline" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    vijaybioinfo/sc_eQTL_pipeline
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../overview/" class="md-tabs__link">
+          
+  
+  
+  Pipeline
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../r-scripts/miscellaneous/" class="md-tabs__link">
+          
+  
+  
+  R-scripts
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="https://github.com/vijaybioinfo/sc_eQTL_pipeline" class="md-tabs__link">
+        
+  
+  
+    
+  
+  GitHub
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="DICE sc-eQTL Pipeline" class="md-nav__button md-logo" aria-label="DICE sc-eQTL Pipeline" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    DICE sc-eQTL Pipeline
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/vijaybioinfo/sc_eQTL_pipeline" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    vijaybioinfo/sc_eQTL_pipeline
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pipeline
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Pipeline
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Installation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configuration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../running/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Running
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    R-scripts
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    R-scripts
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../r-scripts/miscellaneous/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Miscellaneous
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://github.com/vijaybioinfo/sc_eQTL_pipeline" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GitHub
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+    <a href="https://github.com/vijaybioinfo/sc_eQTL_pipeline/edit/main/docs/pipeline/configuration.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+    </a>
+  
+  
+
+
+<h1 id="running-the-pipeline">Running the pipeline</h1>
+<p>Our pipeline was run on a high-performance computing cluster using the SLURM workload manager. </p>
+<p>We used the following command to run the pipeline:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">cd</span><span class="w"> </span>/path/to/working/directory
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>logs
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>ln<span class="w"> </span>-s<span class="w"> </span>/path/to/bin<span class="w"> </span>bin<span class="w"> </span><span class="c1"># Create a symbolic link to the bin directory containing the scripts</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>ln<span class="w"> </span>-s<span class="w"> </span>/path/to/Snakefile<span class="w"> </span>Snakefile<span class="w"> </span><span class="c1"># Create a symbolic link to the Snakefile</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>ln<span class="w"> </span>-s<span class="w"> </span>/path/to/config.yaml<span class="w"> </span>config.yaml<span class="w"> </span><span class="c1"># Create a symbolic link to the configuration file</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>mamba<span class="w"> </span>activate<span class="w"> </span>DLCP_v3<span class="w"> </span><span class="c1"># Make sure to activate the appropriate conda environment</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>snakemake<span class="w"> </span>-s<span class="w"> </span>Snakefile<span class="w"> </span>--profile<span class="w"> </span>/path/to/profiles/slurm<span class="w"> </span>--configfile<span class="w"> </span>/path/to/config.yaml<span class="w"> </span>--stats<span class="w"> </span>logs/snakemake.stats<span class="w"> </span>&gt;<span class="p">&amp;</span><span class="w"> </span>logs/snakemake.log<span class="w"> </span><span class="c1"># Add -np options for a dry run to check for any potential issues before actual execution</span>
+</code></pre></div>
+<p>For specific details on the SLURM profile used, please refer to the <code>profiles/slurm</code> directory in the repository. The <code>--stats</code> option generates a statistics file that provides insights into the execution of the pipeline, while the <code>-np</code> option allows for a dry run to check for any potential issues before actual execution. For further details on the available options and configurations, please refer to the Snakemake documentation.</p>
+<h1 id="configuration">Configuration</h1>
+<p>All pipeline parameters live in <code>snake_config.yaml</code>. Edit this file before running.</p>
+<h2 id="full-config-reference">Full config reference</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># snake_config.yaml</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="nt">inpFiles</span><span class="p">:</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">  </span><span class="nt">vcf_genotype</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/path/to/genotype.vcf.gz</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">  </span><span class="nt">datasets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/path/to/datasets.csv</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">  </span><span class="nt">covariates</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/path/to/covariates.txt</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">  </span><span class="nt">snpfiles</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/path/to/snpfiles.txt</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">  </span><span class="nt">geneannot</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/path/to/geneannot.txt</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">  </span><span class="nt">geneannot_complete</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/path/to/geneannot_complete.txt</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">  </span><span class="nt">rstables</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/path/to/rstables/</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="nt">fastqtl_parameters</span><span class="p">:</span>
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="w">  </span><span class="nt">chunks</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">100</span>
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="w">  </span><span class="nt">ma_sample</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span>
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="w">  </span><span class="nt">cis_window</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000000</span>
+<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="w">  </span><span class="nt">permute_down</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
+<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="w">  </span><span class="nt">permute_up</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10000</span>
+<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>
+<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="nt">parameters</span><span class="p">:</span>
+<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a><span class="w">  </span><span class="nt">MAF</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.05</span>
+<a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a><span class="w">  </span><span class="nt">PCS</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a><span class="w">  </span><span class="nt">Factors</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
+<a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a><span class="w">  </span><span class="nt">permutations</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a><span class="w">  </span><span class="nt">covariates</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&#39;Gender&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;Age&#39;</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a><span class="w">  </span><span class="nt">run_var_genes</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"> </span><span class="c1">## True or False</span>
+<a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a><span class="w">  </span><span class="nt">n_var_genes</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">NA</span><span class="w"> </span><span class="c1">### if &#39;run_var_genes&#39; == True, &#39;n_var_genes&#39; int &gt; 0 &amp; &lt; number genes in the matrix. If &#39;run_var_genes&#39; == False, &#39;n_var_genes&#39; == NA</span>
+<a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a>
+<a id="__codelineno-1-28" name="__codelineno-1-28" href="#__codelineno-1-28"></a><span class="nt">config</span><span class="p">:</span>
+<a id="__codelineno-1-29" name="__codelineno-1-29" href="#__codelineno-1-29"></a><span class="w">  </span><span class="nt">workdir</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/path/to/workdir/</span>
+<a id="__codelineno-1-30" name="__codelineno-1-30" href="#__codelineno-1-30"></a><span class="w">  </span><span class="nt">peertool</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/path/to/peertool</span>
+</code></pre></div>
+<h2 id="parameter-descriptions">Parameter descriptions</h2>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>inpFiles/vcf_genotype</code></td>
+<td>/path/to/genotype.vcf.gz</td>
+<td>Path to the input VCF file containing genotype data. The VCF file should be indexed and compressed with bgzip.</td>
+</tr>
+<tr>
+<td><code>inpFiles/datasets</code></td>
+<td>/path/to/datasets.csv</td>
+<td>Path to a CSV file containing the list of datasets to analyze. The CSV file should have a column named 'dataset' with the names of the datasets.</td>
+</tr>
+<tr>
+<td><code>inpFiles/covariates</code></td>
+<td>/path/to/covariates.txt</td>
+<td>Path to a tab-delimited text file containing covariate information for the samples. The file should have a header row with column names corresponding to the covariates (e.g., 'Gender', 'Age').</td>
+</tr>
+<tr>
+<td><code>inpFiles/snpfiles</code></td>
+<td>/path/to/snps_chrs_files_maf0.05.txt</td>
+<td>Path to a text file containing the list of SNP files for each chromosome.</td>
+</tr>
+<tr>
+<td><code>inpFiles/geneannot</code></td>
+<td>/path/to/geneAnnot.txt</td>
+<td>Path to a text file containing gene annotation information with matrixeQTL format. Because our analysis is set around TSS, the start and end positions should be specified relative to the transcription start site.</td>
+</tr>
+<tr>
+<td><code>inpFiles/geneannot_complete</code></td>
+<td>/path/to/geneAnnot_complete.txt</td>
+<td>Path to a text file containing complete gene annotation information with matrixeQTL format. This file should contain the full gene coordinates (start and end positions) relative to the reference genome.</td>
+</tr>
+<tr>
+<td><code>inpFiles/rstables</code></td>
+<td>/path/to/rstables/</td>
+<td>Path to a directory containing rsID tables for each chromosome. It is use for final annotation of significant eQTLs with rsIDs.</td>
+</tr>
+<tr>
+<td><code>parameters/MAF</code></td>
+<td>0.05</td>
+<td>Minor allele frequency threshold for filtering variants.</td>
+</tr>
+<tr>
+<td><code>parameters/PCS</code></td>
+<td>1</td>
+<td>Number of genotype principal components to include as covariates in the eQTL analysis.</td>
+</tr>
+<tr>
+<td><code>parameters/Factors</code></td>
+<td>2</td>
+<td>Number of expression PEER factors to include as covariates in the eQTL analysis.</td>
+</tr>
+<tr>
+<td><code>parameters/permutations</code></td>
+<td>1</td>
+<td>Number of permutations to perform for significance testing. Set to 1 to skip permutation testing.</td>
+</tr>
+<tr>
+<td><code>parameters/covariates</code></td>
+<td>['Gender', 'Age']</td>
+<td>List of covariates to include in the eQTL analysis. This must match the column names in the covariates file.</td>
+</tr>
+<tr>
+<td><code>parameters/run_var_genes</code></td>
+<td>False</td>
+<td>Whether to run the variable gene selection step. Set to True to select the top variable genes for eQTL analysis.</td>
+</tr>
+<tr>
+<td><code>parameters/n_var_genes</code></td>
+<td>NA</td>
+<td>If <code>run_var_genes</code> is True, this specifies the number of top variable genes to select for eQTL analysis. Must be an integer greater than 0 and less than the total number of genes in the expression matrix. If <code>run_var_genes</code> is False, this should be set to NA.</td>
+</tr>
+<tr>
+<td><code>config/workdir</code></td>
+<td>/path/to/workdir/</td>
+<td>Path to the working directory where all intermediate and final results will be stored.</td>
+</tr>
+<tr>
+<td><code>config/peertool</code></td>
+<td>/path/to/peertool</td>
+<td>Path to the PEER tool executable. This tool is used for inferring hidden confounding factors in gene expression data.</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong><strong>NOTE:</strong></strong> Minimal example files for the input parameters can be found in the <a href="https://github.com/vijaybioinfo/example_files/">example_files</a> directory of this repository.</p>
+</blockquote>
+<h2 id="example-input-files">Example input files</h2>
+<h3 id="datasets-csv-file">datasets CSV file</h3>
+<p>Datasets CSV file should have the following format:</p>
+<table>
+<thead>
+<tr>
+<th>cell</th>
+<th>tissue</th>
+<th>seurat.obj.file</th>
+<th>resolution</th>
+<th>subset</th>
+<th>expFile</th>
+<th>donorFile</th>
+<th>clusterID</th>
+<th>cluster_def</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CD8</td>
+<td>LUNG</td>
+<td>/path/to/seurat_object.RDS</td>
+<td>0.2</td>
+<td>0</td>
+<td>/path/to/pseudobulk/profile/gene_expression.txt</td>
+<td>/path/to/donors.txt</td>
+<td>Naive CD8 T cells (TN)</td>
+<td>Naive CD8 T cells (TN)</td>
+</tr>
+<tr>
+<td>CD8</td>
+<td>LUNG</td>
+<td>/path/to/seurat_object.RDS</td>
+<td>0.2</td>
+<td>1</td>
+<td>/path/to/pseudobulk/profile/gene_expression.txt</td>
+<td>/path/to/donors.txt</td>
+<td>Central memory CD8 T cells (TCM)</td>
+<td>Central memory CD8 T cells (TCM)</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>expFile:</strong> Gene expression file should be a tab-delimited text file with donors as columns and genes as rows. The first column should contain gene identifiers (e.g., Ensembl IDs or gene symbols). <a href="https://github.com/vijaybioinfo/example_files/expression_files/">expression files</a>.</li>
+<li><strong>donorFile:</strong> Donor file should be list of donors in the same order as the columns in the gene expression file.</li>
+</ul>
+<h3 id="covariates-file">Covariates file</h3>
+<p>Covariates file should be a tab-delimited text file with samples as rows and covariates as columns. The first row should contain the column names for the covariates (e.g., 'Gender', 'Age').</p>
+<table>
+<thead>
+<tr>
+<th>id</th>
+<th>SAMPLE1</th>
+<th>SAMPLE2</th>
+<th>SAMPLE3</th>
+<th>SAMPLE4</th>
+<th>SAMPLE5</th>
+<th>SAMPLE6</th>
+<th>SAMPLE7</th>
+<th>SAMPLE8</th>
+<th>SAMPLE9</th>
+<th>SAMPLE10</th>
+<th>SAMPLE11</th>
+<th>SAMPLE12</th>
+<th>SAMPLE13</th>
+<th>SAMPLE14</th>
+<th>SAMPLE15</th>
+<th>SAMPLE16</th>
+<th>SAMPLE17</th>
+<th>SAMPLE18</th>
+<th>SAMPLE19</th>
+<th>SAMPLE20</th>
+<th>SAMPLE21</th>
+<th>SAMPLE22</th>
+<th>SAMPLE23</th>
+<th>SAMPLE24</th>
+<th>SAMPLE25</th>
+<th>SAMPLE26</th>
+<th>SAMPLE27</th>
+<th>SAMPLE28</th>
+<th>SAMPLE29</th>
+<th>SAMPLE30</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Age</td>
+<td>69</td>
+<td>27</td>
+<td>70</td>
+<td>63</td>
+<td>50</td>
+<td>47</td>
+<td>28</td>
+<td>6838</td>
+<td>36</td>
+<td>25</td>
+<td>64</td>
+<td>45</td>
+<td>30</td>
+<td>50</td>
+<td>24</td>
+<td>5038</td>
+<td>69</td>
+<td>42</td>
+<td>48</td>
+<td>21</td>
+<td>39</td>
+<td>60</td>
+<td>58</td>
+<td>5261</td>
+<td>37</td>
+<td>45</td>
+<td>65</td>
+<td>33</td>
+<td>49</td>
+<td>59</td>
+</tr>
+<tr>
+<td>Gender</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>101</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>100</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>101</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<h3 id="snp-files">SNP files</h3>
+<p>SNP files contain three  columns representing chromosome, SNP identifier, and SNP location. SNP and SNP_LOC columns should be consistent with the VCF file used for genotypes. Both files should have matrixeQTL format. (SNP files)[https://github.com/vijaybioinfo/example_files/snp_files/]</p>
+<p>The SNP files should be tab-delimited text files with the following format:</p>
+<table>
+<thead>
+<tr>
+<th>CHR</th>
+<th>SNP</th>
+<th>SNP_LOC</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>20</td>
+<td>example_files/snp_files/snp/snp_20.txt</td>
+<td>example_files/snp_files/snp_loc/snppos_20.txt</td>
+</tr>
+<tr>
+<td>21</td>
+<td>example_files/snp_files/snp/snp_21.txt</td>
+<td>example_files/snp_files/snp_loc/snppos_21.txt</td>
+</tr>
+</tbody>
+</table>
+<h3 id="gene-annotation-files">Gene annotation files</h3>
+<p>Gene annotation files should have similar matrixeQTL format with three columns representing gene identifier, chromosome, and gene location. The gene location should be specified relative to the transcription start site (TSS).</p>
+<table>
+<thead>
+<tr>
+<th>geneid</th>
+<th>chr</th>
+<th>s1</th>
+<th>s2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ENSG00000178591 20</td>
+<td>87250</td>
+<td>87251</td>
+<td></td>
+</tr>
+<tr>
+<td>ENSG00000125788 20</td>
+<td>142590</td>
+<td>142591</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="gene-annotation-complete-files">Gene annotation complete files</h3>
+<p>Gene annotation complete file should have extra columns with the full gene coordinates (start and end positions) relative to the reference genome. This file is used for final annotation of significant eQTLs with gene names.</p>
+<h3 id="rsid-tables">rsID tables</h3>
+<p>RsID tables should have columns representing chromosome, position, reference allele, alternate allele, ID used in the VCF file, and the rsID. These tables are used for final annotation of significant eQTLs with rsIDs. (rstables)[https://github.com/vijaybioinfo/example_files/rs_tables/]</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "search.highlight", "content.code.copy", "content.action.edit"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
