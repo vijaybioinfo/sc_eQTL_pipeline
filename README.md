@@ -23,12 +23,6 @@ And includes **Bayesian fine-mapping** via SuSiE to identify credible causal var
 
 ## Pipeline stages
 
-```
-Pseudobulk generation  →  Preprocessing  →  QTL mapping  →  FDR correction  →  Fine-mapping
-   (input_seurat.R)         (Snakemake)     (MatrixEQTL       (EigenMT /         (SuSiE /
-                                             + FastQTL)       permutation)      credible sets)
-```
-
 1. **Preprocessing** — Expression data is normalized and formatted. Genotype data is subset to relevant donors, LD-pruned, and used to compute genotype PCs. PEER factors are estimated as latent covariates. All covariates are merged into a single matrix.
 
 2. **MatrixEQTL mapping** — Cis-eQTL associations are tested per chromosome. A null distribution is built via permutations and FDR is calculated using either EigenMT or permutation-based methods.
