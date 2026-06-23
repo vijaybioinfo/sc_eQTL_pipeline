@@ -106,6 +106,21 @@ Edit `snake_conf.yaml` to set your input files, parameters, and working director
 | Dataset table (`.csv`) | Sample sheet linking tissue/cell/subset to input files |
 
 ---
+> [!NOTE]
+> ## Example Data
+>
+> The example dataset provided in this repository is **simulated** and does not
+> represent real patient or donor information. It was generated synthetically for
+> demonstration purposes only, to allow users to test and explore the pipeline
+> without requiring access to the original data.
+>
+> No real genomic or personal information from study participants 
+> is included or can be inferred from these files.
+>
+> To reproduce the results reported in the paper, access to the original dataset
+> is required.
+
+---
 
 ## Output files
 
@@ -138,7 +153,8 @@ Full documentation is available at:
 
 If you use this pipeline in your work, please cite:
 
-> *manuscript in preparation* — DICE team, La Jolla Institute for Immunology.
+> Benjamin J. Schmiedel et al., Single-cell eQTL analysis of activated T cell subsets reveals activation and cell type–dependent effects of disease-risk variants. Sci. Immunol.7,eabm2508(2022).DOI:10.1126/sciimmunol.abm2508
+> Benjamin J. Schmiedel et al., Tissue-resident immune cells drive genetic risk in autoimmune and lung diseases. Nat. immunol. 2026 (in press).
 
 ---
 
